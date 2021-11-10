@@ -2,7 +2,8 @@
 
 # ----------- # # ----------- # # ----------- #
 # DEPENDENCIES
-dependencies <- c('reshape', 'knitr', 'markdown', 'ggplot2', 'scales', 'dplyr', 'RColorBrewer', 'stringr', 'rga', 'lubridate', 'readr')
+# dependencies <- c('reshape', 'knitr', 'markdown', 'ggplot2', 'scales', 'dplyr', 'RColorBrewer', 'stringr', 'lubridate', 'readr', 'googleAnalyticsR', 'gtrendsR', 'tm', 'bcrypt', 'data.table')
+dependencies <- c('reshape', 'knitr', 'markdown', 'ggplot2', 'scales', 'dplyr', 'RColorBrewer', 'stringr', 'lubridate', 'readr', 'googleAnalyticsR', 'gtrendsR')
 lapply(dependencies, require, character.only = TRUE)
 
 # ----------- # # ----------- # # ----------- #
@@ -42,7 +43,10 @@ setEnvVars <- function() {
 }
 
 # Google Analytics
-if (!exists('ga')) print("Google Analytics: rga.open(instance='ga')")
+gaSetUp <- function() {
+  googleAuthR::gar_set_client(json = 'secrets/google-oauth.json')
+  ga_auth(email = Sys.getenv('GA_EMAIL'), json_file = 'secrets/ga-key.json')
+}
 
 # Config env
 setReportingWd()
@@ -56,3 +60,11 @@ source('./reports/run.R')
 
 # No scientific notation
 options(scipen = 999)
+
+# ----------- # # ----------- # # ----------- #
+# GA VARS
+GA_ID = Sys.getenv('GA_ID')
+GA_START_DATE = '2020-05-01'
+GA_END_DATE = Sys.Date() - 1
+GA_PURCHASE_GOAL = 'goal1Completions'
+GA_VALUE = 'goalValueAll'

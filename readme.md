@@ -14,6 +14,8 @@ The objective is to have simple opinionated framework for reproducible data-anal
 
 * [R](http://www.r-project.org/)
 
+* Google Analytics - see https://docs.google.com/document/d/1AOqtjWSjozCJVHLrFqinwKGz9t-uLdDWWdt_T-Cqo3s/edit
+
 ***
 
 # Structure
